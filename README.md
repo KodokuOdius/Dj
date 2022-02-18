@@ -1,1 +1,1 @@
-# For Gjango
+# For Django
