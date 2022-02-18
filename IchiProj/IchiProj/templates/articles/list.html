@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Последнии статьи
+{% endblock %}
+
+{% block content %}
+    {% if lasts %}
+        {% for article in lasts%}
+            <a href="{% url 'articles:detail' article.id %}">{{article.article_title}}</a>
+        {% endfor %}
+    {% else %}
+        Does not exist
+
+    {% endif %}
+
+{% endblock %}
