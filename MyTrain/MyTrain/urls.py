@@ -20,7 +20,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 
-
+# Главные ссылки для приложения
 urlpatterns = [
     path('', include('news.urls')),
     path('admin/', admin.site.urls),
