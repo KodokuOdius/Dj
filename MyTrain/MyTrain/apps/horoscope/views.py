@@ -99,7 +99,7 @@ def index(request):
         context={"title": "Horoscope", "signs_of_zodiac": signs_of_zodiac}
     )
 
-    
+
 def zodiac_info(request, sign_of_zodiac):
     # zodiac_name = request.GET.get("zodiac", "")
 
