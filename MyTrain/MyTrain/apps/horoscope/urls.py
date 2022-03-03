@@ -6,13 +6,5 @@ from . import views
 app_name = 'horoscope'
 urlpatterns = [
     path('', views.index, name="index"), # Главная
-    path('', views.index, name="index"), 
-    path('', views.index, name="index"), 
-    path('', views.index, name="index"), 
-    path('', views.index, name="index"), 
-    path('', views.index, name="index"), 
-    path('', views.index, name="index"), 
-    path('', views.index, name="index"), 
-    path('', views.index, name="index"), 
-
+    path('<sign_of_zodiac>/', views.zodiac_info, name="zodiac_info")
 ]
