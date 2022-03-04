@@ -14,15 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from unicodedata import name
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from news import views
 
-# Главные ссылки для приложения
+# Главные ссылки для приложений
 urlpatterns = [
-    #path('', ),
+    path('', include('news.urls')),
+    path('category/', views.category),
     path('admin/', admin.site.urls),
     path('news/', include('news.urls')),
     path('horoscope/', include('horoscope.urls'))

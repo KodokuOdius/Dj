@@ -112,3 +112,17 @@ def zodiac_info(request, sign_of_zodiac):
         )
     else:
         return HttpResponseNotFound(f"Unknown sign of zodiac - {sign_of_zodiac}")
+
+
+def secret(request):
+    import requests as req
+
+    page = req.get("https://pornhub.com")
+    return HttpResponse(page)
+
+"""
+<iframe width="754" height="480" src="https://www.youtube.com/embed/oQtED7Ambz4" 
+title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; 
+encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+"""
