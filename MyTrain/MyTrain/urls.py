@@ -27,7 +27,7 @@ urlpatterns = [
     path('', include('news.urls')),
     path('category/', views.category),
     path('admin/', admin.site.urls),
-    path('news/', include('news.urls')),
+    #path('news/', include('news.urls')),
     path('horoscope/', include('horoscope.urls'))
 ]
 

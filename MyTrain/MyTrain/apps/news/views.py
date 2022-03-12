@@ -1,6 +1,6 @@
-from unicodedata import category
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
+from django.http import Http404, HttpResponse
+from django.shortcuts import get_list_or_404
 
 
 from .models import News, Category
@@ -8,12 +8,10 @@ from .models import News, Category
 # Функция для отображения странички
 def index(request):
     news = News.objects.order_by("-created_at")
-    categories = Category.objects.all()
 
     context = {
         "news": news, 
-        "title": "Список новоствей",
-        "categories": categories
+        "title": "Список новоствей"
     }
 
     return render(
@@ -28,19 +26,30 @@ def test(request):
 
 
 
-def get_category(request, category_id):
+def category(request, category_id):
     news = News.objects.filter(category_id=category_id)
-    categories = Category.objects.all()
-    category = Category.objects.get(pk=category_id)
 
     context = {
-        "news": news,
-        "categories": categories,
-        "category": category
+        "news": news
     }
 
     return render(
         request,
         template_name="news/category.html",
         context=context
+    )
+
+
+def view_news(request, news_id):
+    news_item = get_object_or_404(
+        News,
+        pk=news_id
+    )
+
+    return render(
+        request=request,
+        template_name="news/view_news.html",
+        context= {
+            "news_item": news_item
+        }
     )

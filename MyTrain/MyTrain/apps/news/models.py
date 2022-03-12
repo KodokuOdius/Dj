@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse, reverse_lazy
 
 
 
@@ -21,6 +22,9 @@ class News(models.Model):
     def ma(self):
         return "Hello from model"
 
+    def get_absolute_url(self):
+        return reverse("news:view_news", kwargs={"news_id": self.pk})
+
     # Мета-данные
     # Отображение
     class Meta:
@@ -34,6 +38,11 @@ class News(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=150, db_index=True, verbose_name="Категория")
+
+
+    def get_absolute_url(self):
+        return reverse_lazy("news:category", kwargs={"category_id": self.pk})
+    
 
     def __str__(self) -> str:
         return self.title

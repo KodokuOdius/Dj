@@ -1,0 +1,7 @@
+{{ a }} {{ b }}
+
+{% for item in categories %}
+    {% comment %} {% url 'news:category' item.pk %} {% endcomment %}
+    <a href=" {{ item.get_absolute_url }}" class="list-group-item list-group-item-action">{{ item.title }}</a>
+
+{% endfor %}

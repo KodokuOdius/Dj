@@ -1,0 +1,19 @@
+{% load news_tags %}
+
+
+
+<div class="list-group">
+    {% get_categories as categories %}
+
+    {% for item in categories %}
+  
+        <a href="{% url 'news:category' item.pk %}" class="list-group-item list-group-item-action">{{ item.title }}</a>
+    {% endfor %}
+
+    {% comment %} с помощью includion tags {% endcomment %}
+    {% comment %} передача аргументов {% endcomment %}
+    {% comment %} {% show_categories  a="Bey" b="User"%} {% endcomment %}
+
+</div>
+
+

@@ -124,8 +124,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+# В папке static хранятся статические файлы такие как, CSS и JS
 
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+# Указание папки для статических файлов
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Доп ссылки для статических файлов
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'MyTrain/static')
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
