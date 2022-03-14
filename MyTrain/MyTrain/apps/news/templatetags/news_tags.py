@@ -15,3 +15,4 @@ def get_categories():
 def show_categories(a="Hello", b="World"):
     categories = get_categories()
     return {"categories" : categories, "a": a, "b": b}
+

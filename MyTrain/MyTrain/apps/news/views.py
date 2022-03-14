@@ -1,9 +1,9 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404, HttpResponse
-from django.shortcuts import get_list_or_404
 
 
 from .models import News, Category
+from .forms import NewsForm
 
 # Функция для отображения странички
 def index(request):
@@ -53,3 +53,21 @@ def view_news(request, news_id):
             "news_item": news_item
         }
     )
+
+def add_news(request):
+    if request.method == 'POST':
+        form = NewsForm(request.POST)
+        if form.is_valid():
+            #print(form.cleaned_data)
+            news = News.objects.create(**form.cleaned_data)
+            return redirect(news)
+    else:
+        form = NewsForm()
+
+
+    return render(
+        request=request,
+        template_name="news/add_news.html",
+        context={"form": form}
+    )
+
