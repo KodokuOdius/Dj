@@ -19,21 +19,18 @@
             Категория: <a href="{{ item.category.get_absolute_url }}"> {{ item.category }} </a>
         </div>
         <div class="card-body">
-            <div class="media">
               {% if item.photo %}
-                <img src="{{ item.photo.url }}" alt="" width="350px" class="mr-3">
+              <img src="{{ item.photo.url }}" alt="" width="350px" class=" float-left mr-3">
 
               {% else %}
-                <img src="https://cdn.pixabay.com/photo/2013/07/13/12/47/girl-160326_960_720.png" alt="" width="350px" class="mr-3">
+              <img src="https://cdn.pixabay.com/photo/2013/07/13/12/47/girl-160326_960_720.png" alt="" width="350px" class="float-left mr-3">
 
               {% endif %}
 
-              <div class="media-body">
-                <h5 class="card-title">{{ item.title }}</h5>
-                <p class="card-text">{{ item.content }}</p>
-                <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Read more...</a>
-              </div>
-            </div>
+
+              <h5 class="card-title">{{ item.title }}</h5>
+              <p class="card-text">{{ item.content|truncatechars:265 }}</p>
+              <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Read more...</a>
         </div>
         <div class="card-footer text-muted">
             {{ item.created_at| date:"Y-m-d H:i:s" }}

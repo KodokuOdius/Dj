@@ -13,8 +13,9 @@ class News(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлено")
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/", verbose_name="Фото", blank=True)
     is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
-    category = models.ForeignKey("Category", on_delete=models.PROTECT, null=True, verbose_name="Категория")
+    category = models.ForeignKey("Category", on_delete=models.PROTECT, verbose_name="Категория")
 
+    
     # Отображение экземпляра
     def __str__(self) -> str:
         return self.title
@@ -23,7 +24,7 @@ class News(models.Model):
         return "Hello from model"
 
     def get_absolute_url(self):
-        return reverse("news:view_news", kwargs={"news_id": self.pk})
+        return reverse("news:view_news", kwargs={"pk": self.pk})
 
     # Мета-данные
     # Отображение
@@ -53,4 +54,3 @@ class Category(models.Model):
 
         # Сортировка для отображения 
         ordering = ["title"]
-    pass
