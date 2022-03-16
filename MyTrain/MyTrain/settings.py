@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'news.apps.NewsConfig',
-    'horoscope.apps.HoroscopeConfig'
+    'horoscope.apps.HoroscopeConfig',
+    'micro_server.apps.MicroServerConfig'
 ]
 
 MIDDLEWARE = [

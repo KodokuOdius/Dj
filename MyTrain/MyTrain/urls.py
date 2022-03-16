@@ -19,14 +19,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from news import views
+# from news import views
 
 # Главные ссылки для приложений
 urlpatterns = [
     path('', include('news.urls')),
     path('admin/', admin.site.urls),
     #path('news/', include('news.urls')),
-    path('horoscope/', include('horoscope.urls'))
+    path('horoscope/', include('horoscope.urls')),
+    path('micro_server/', include('micro_server.urls'))
 ]
 
 
