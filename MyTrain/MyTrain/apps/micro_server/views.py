@@ -2,7 +2,9 @@ import threading
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from .forms import MSG
+from .forms import MSGForm
+from .models import MSG
+
 
 # Create your views here.
 
@@ -12,12 +14,12 @@ def msg(request):
     import asyncio
 
     if request.method == 'POST':
-        form = MSG(request.POST)
+        form = MSGForm(request.POST)
         if form.is_valid():
 
             data = form.cleaned_data
 
-            print(data)
+            MSG.objects.create(**data)
 
             def worker(ws, loop):
                 asyncio.set_event_loop(loop)
@@ -33,7 +35,7 @@ def msg(request):
 
             return redirect(".")
     else:
-        form = MSG()
+        form = MSGForm()
 
 
     return render(

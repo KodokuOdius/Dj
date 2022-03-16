@@ -1,23 +1,8 @@
-async def msg(title, content):
-    users = DB.request("select user_id from vk_users;", "fetchall")
-
-    for user in users:
-        await bot.api.messages.send(
-            user_id=user,
-            message=f"{title}!\n\n{content}"
-        )
-
-    print("VK Done!")
-
-
-
-
-
 from vkbottle import Bot
 from vkbottle.bot import Message
 
-import local_settings as ls
-import simplePostgrConnector as Connector
+from . import local_settings as ls
+from . import simplePostgrConnector as Connector
 
 DB = Connector.PostgrDB(
     database_name=ls.NAME,
@@ -51,3 +36,14 @@ if __name__ == "__main__":
     bot.run_forever()
 
 
+async def msg(title, content):
+    users = DB.request("select user_id from vk_users where sub = true;", "fetchall")
+
+    for user in users:
+        await bot.api.messages.send(
+            user_id=int(user[0]),
+            message=f"{title}!\n\n{content}",
+            random_id=0
+        )
+
+    print("VK Done!")

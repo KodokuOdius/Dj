@@ -1,21 +1,7 @@
-async def msg(title, content):
-    users = DB.request("select user_id from tg_users;", "fetchall")
-
-    for user in users:
-        await dp.bot.send_message(
-            chat_id=user,
-            text=f"<h2><b>{title}</b></h2>\n\n{content}"
-        )
-
-
-    print("TG Done!")
-
-
-
 from aiogram import Bot, types, executor, Dispatcher
 
 from . import local_settings as ls
-import simplePostgrConnector as Connector
+from . import simplePostgrConnector as Connector
 
 DB = Connector.PostgrDB(
     database_name=ls.NAME,
@@ -50,5 +36,13 @@ if __name__ == "__main__":
 
 
 
+async def msg(title, content):
+    users = DB.request("select user_id from tg_users where sub = true;", "fetchall")
 
+    for user in users:
+        await dp.bot.send_message(
+            chat_id=int(user[0]),
+            text=f"<b>{title}</b>\n\n{content}"
+        )
 
+    print("TG Done!")

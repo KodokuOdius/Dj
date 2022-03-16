@@ -5,7 +5,7 @@ import re
 from .models import Bots
 
 
-class MSG(forms.Form):
+class MSGForm(forms.Form):
     # label - Название поля, отображение на странице
     # reqired - Важность поля (обязательно/необязательно)
     # queryset - множество для списов
@@ -37,12 +37,10 @@ class MSG(forms.Form):
     )
     # Category.objects.all()
 
-    l = None
-
     select = forms.ModelChoiceField(
         queryset=Bots.objects.all(),
         empty_label="Выберите ботов",
-        label="Категория", 
+        label="Боты", 
         widget=forms.Select(
             attrs={
                 "class": "form-control"
