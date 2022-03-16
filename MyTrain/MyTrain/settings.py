@@ -81,10 +81,19 @@ WSGI_APPLICATION = 'MyTrain.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
+from . import local_settings as ls
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': ls.NAME,
+        'USER': ls.USER,
+        'PASSWORD': ls.PASSWORD,
+        'HOST': ls.HOST,
+        'PORT': ls.PORT
     }
 }
 
