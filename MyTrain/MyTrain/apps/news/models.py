@@ -14,7 +14,9 @@ class News(models.Model):
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/", verbose_name="Фото", blank=True)
     is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
     category = models.ForeignKey("Category", on_delete=models.PROTECT, verbose_name="Категория")
-
+    
+    from random import randint as rdt
+    views = models.IntegerField(default=rdt(1, 1000))
     
     # Отображение экземпляра
     def __str__(self) -> str:
