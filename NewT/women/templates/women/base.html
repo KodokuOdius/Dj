@@ -33,12 +33,19 @@
         <!-- Sidebar слева -->
             <td valign="top" class="left-chapters">
             <ul id="leftchapters">
-                <li class="selected">Все категории</li>
-                <li><a href="#">Актрисы</a></li>
-                <li><a href="#">Певицы</a></li>
-                <li><a href="#">Спортсменки</a></li>
-                <li class="share">
-                </li>
+                {% if category_selected == 0 %}
+                    <li class="selected">Все категории</li>
+                {% else %}
+                    <li><a href="{% url 'women:home' %}">Все категории</a></li>
+                {% endif %}
+
+                {% for category in categories %}
+                    {% if category.pk == category_selected %}
+                        <li class="selected">{{ category.name }}</li>
+                    {% else %}
+                        <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
             </ul>
         </td>
         <!-- Конец Sidebar'а -->

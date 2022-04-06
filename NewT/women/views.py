@@ -1,6 +1,7 @@
+from argparse import HelpFormatter
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseNotFound, Http404
-from .models import Women
+from .models import Category, Women
 
 
 menu = [
@@ -12,11 +13,33 @@ menu = [
 
 def index(request): #HttpRequest
     posts = Women.objects.all()
+    categories = Category.objects.all()
 
     context = {
         'posts': posts,
         'menu': menu,
-        'title': 'Main page'
+        'categories': categories,
+        'title': 'Main page',
+        'category_selected': 0
+
+    }
+    return render(request, 'women/index.html', context=context)
+
+
+def category(request, category_id):
+    posts = Women.objects.filter(category_id=category_id)
+    if not posts:
+        raise Http404
+
+    categories = Category.objects.all()
+
+    context = {
+        'posts': posts,
+        'menu': menu,
+        'categories': categories,
+        'title': 'Categories',
+        'category_selected': category_id
+
     }
     return render(request, 'women/index.html', context=context)
 
@@ -41,8 +64,7 @@ def show_post(request, post_id):
     return HttpResponse(f'<h1>We are showing your this post id = {post_id}</h1>')
 
 
-def categories(request, cat):
-    return HttpResponse(f"<h1>Категория! <p>{cat}</p></h1>")
+
 
 
 def arc(request, year):
