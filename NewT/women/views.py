@@ -1,8 +1,44 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseNotFound, Http404
+from .models import Women
+
+
+menu = [
+    {'title': 'About site', 'url_name': 'women:about'},
+    {'title': 'Add page', 'url_name': 'women:add_page'},
+    {'title': 'Contact us', 'url_name': 'women:contact'},
+    {'title': 'Log In', 'url_name': 'women:login'}
+]
 
 def index(request): #HttpRequest
-    return HttpResponse("Hello, World!")
+    posts = Women.objects.all()
+
+    context = {
+        'posts': posts,
+        'menu': menu,
+        'title': 'Main page'
+    }
+    return render(request, 'women/index.html', context=context)
+
+
+def about(request):
+    return render(request, 'women/about.html', context={'menu': menu, 'title': 'About site'})
+
+
+def add_page(request):
+    return HttpResponse('<h1>Add page</h1>')
+
+
+def contact(request):
+    return HttpResponse('<h1>Contact us</h1>')
+
+
+def login(request):
+    return HttpResponse('<h1>Log In</h1>')
+
+
+def show_post(request, post_id):
+    return HttpResponse(f'<h1>We are showing your this post id = {post_id}</h1>')
 
 
 def categories(request, cat):

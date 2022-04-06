@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Women(models.Model):
@@ -11,3 +12,8 @@ class Women(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    
+    def get_absolute_url(self):
+        return reverse("women:post", kwargs={"post_id": self.pk})
+    
