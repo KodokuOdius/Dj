@@ -9,6 +9,12 @@
                     <p class="last">Дата: {{post.time_update|date:"d-m-Y H:i:s"}}</p>
                 </div>
 
+				{% if post.photo %}
+				<p>
+					<img class="img-article-left thumb" src="{{ post.photo.url }}">
+				</p>
+				{% endif %}
+
                 <h2>{{post.title}}</h2>
 	{% autoescape on %}
 	{{post.content|linebreaks|truncatewords:50}}

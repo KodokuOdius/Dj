@@ -1,4 +1,5 @@
 {% load static %}
+{% load women_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +11,14 @@
 </head>
 <body>
     <table class="table-page" border=0 cellpadding="0" cellspacing="0">
+
     <tr><td valign=top>
     {% block mainmenu %}
             <div class="header">
                 <ul id="mainmenu" class="mainmenu">
                 <li class="logo"><a href="{% url 'women:home' %}"><div class="logo"></div></a></li>
+
+    {% get_menu as menu %}
     {% for m in menu %}
         {% if not forloop.last %}
                 <li><a href="{% url m.url_name %}">{{m.title}}</a></li>
@@ -32,6 +36,7 @@
         <tr>
         <!-- Sidebar слева -->
             <td valign="top" class="left-chapters">
+
             <ul id="leftchapters">
                 {% if category_selected == 0 %}
                     <li class="selected">Все категории</li>
@@ -39,13 +44,7 @@
                     <li><a href="{% url 'women:home' %}">Все категории</a></li>
                 {% endif %}
 
-                {% for category in categories %}
-                    {% if category.pk == category_selected %}
-                        <li class="selected">{{ category.name }}</li>
-                    {% else %}
-                        <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
-                    {% endif %}
-                {% endfor %}
+                {% show_categories category_selected=category_selected %}
             </ul>
         </td>
         <!-- Конец Sidebar'а -->

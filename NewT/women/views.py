@@ -4,21 +4,12 @@ from django.http import HttpResponse, HttpResponseNotFound, Http404
 from .models import Category, Women
 
 
-menu = [
-    {'title': 'About site', 'url_name': 'women:about'},
-    {'title': 'Add page', 'url_name': 'women:add_page'},
-    {'title': 'Contact us', 'url_name': 'women:contact'},
-    {'title': 'Log In', 'url_name': 'women:login'}
-]
 
 def index(request): #HttpRequest
     posts = Women.objects.all()
-    categories = Category.objects.all()
 
     context = {
         'posts': posts,
-        'menu': menu,
-        'categories': categories,
         'title': 'Main page',
         'category_selected': 0
 
@@ -31,12 +22,9 @@ def category(request, category_id):
     if not posts:
         raise Http404
 
-    categories = Category.objects.all()
 
     context = {
         'posts': posts,
-        'menu': menu,
-        'categories': categories,
         'title': 'Categories',
         'category_selected': category_id
 
@@ -45,7 +33,7 @@ def category(request, category_id):
 
 
 def about(request):
-    return render(request, 'women/about.html', context={'menu': menu, 'title': 'About site'})
+    return render(request, 'women/about.html', context={'title': 'About site'})
 
 
 def add_page(request):
