@@ -5,6 +5,7 @@ from django.urls import reverse
 
 class Women(models.Model):
     title = models.CharField(max_length=255, verbose_name='Заголовок')
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     content = models.TextField(blank=True, verbose_name='Содержание')
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/", verbose_name='Фотография')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
@@ -18,14 +19,14 @@ class Women(models.Model):
     # models.SET() - set users's (personal) value
     # models.DO_NOTHING - nothing
 
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Категория')
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория')
 
     def __str__(self) -> str:
         return self.title
 
     
     def get_absolute_url(self):
-        return reverse("women:post", kwargs={"post_id": self.pk})
+        return reverse("women:post", kwargs={"post_slug": self.slug})
 
 
     class Meta:
@@ -36,12 +37,13 @@ class Women(models.Model):
   
 class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True, verbose_name="Категория")
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
 
     def __str__(self) -> str:
         return self.name
 
     def get_absolute_url(self):
-        return reverse("women:category", kwargs={"category_id": self.pk})
+        return reverse("women:category", kwargs={"category_slug": self.slug})
 
     
     class Meta:
