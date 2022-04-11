@@ -29,4 +29,5 @@ def get_menu():
         {'title': 'Contact us', 'url_name': 'women:contact'},
         {'title': 'Log In', 'url_name': 'women:login'}
     ]
+
     return menu

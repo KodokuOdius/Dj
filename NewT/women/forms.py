@@ -1,6 +1,6 @@
-from cProfile import label
 from django import forms
 from .models import *
+import re
 
 
 class AddPostForm(forms.ModelForm):
@@ -11,6 +11,10 @@ class AddPostForm(forms.ModelForm):
 
     def clean_title(self):
         title = self.cleaned_data['title']
+        if re.findall(r"\b[0-9]+", title):
+            raise forms.ValidationError("ЧИСЛООООООООООООО!")
+
+
         if len(title) > 150:
             raise forms.ValidationError("Длина больше 150 символов")
         
@@ -23,5 +27,5 @@ class AddPostForm(forms.ModelForm):
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-input'}),
-            'content': forms.Textarea(attrs={'cols': 60, 'rows': 5})
+            'content': forms.Textarea(attrs={'cols': 60, 'rows': 4})
         }
